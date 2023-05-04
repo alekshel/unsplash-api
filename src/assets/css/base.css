@@ -6,6 +6,7 @@
   --color-grey: #C4C4C4;
   --color-black: #000000;
   --color-yellow: #FFF200;
+  --color-green: #38FF00;
 }
 
 *,
@@ -20,7 +21,7 @@
 body {
   min-height: 100vh;
   color: var(--color-white);
-  background: var(--color-white-e5);
+  background: var(--color-white);
   /* transition: color 0.5s, background-color 0.5s; */
 
   font-family: 'Roboto', sans-serif;

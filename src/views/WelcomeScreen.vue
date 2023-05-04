@@ -100,13 +100,6 @@
 </template>
 
 <style>
-  .darker-wrap {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, .5);
-  }
-
   .search-box {
     position: relative;
     display: flex;

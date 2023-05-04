@@ -4,3 +4,18 @@ header {
   width: 100%;
   background: var(--color-black);
 }
+
+.search-icon path {
+  fill: var(--color-white);
+}
+
+.darker-wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+}
+
+.favorites-btn path {
+  fill: var(--color-black);
+}
