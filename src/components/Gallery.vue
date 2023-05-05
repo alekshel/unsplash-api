@@ -18,13 +18,6 @@
 
     mounted() {
       window.onscroll = () => {
-        const rect = this.loadElement.getBoundingClientRect()
-        console.log(rect.right)
-        console.log(
-            rect.top >= 0,
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-          )
-
         if (!this.isInViewport(this.loadElement)) {
           return
         }
