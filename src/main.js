@@ -8,6 +8,7 @@ const app = createApp(App)
 app.config.globalProperties.$api = {
   apiLink: "https://api.unsplash.com",
   clientId: "IezawPRQTq40lRgOjbqE8OW4rGkgM7ZX3qspeAfoew4",
+  baerer: "4Nso5_aR4-8GalbUWi3EZsaHyGDSNU85lvOsTwX_PNc",
   perPage: 9,
 }
 

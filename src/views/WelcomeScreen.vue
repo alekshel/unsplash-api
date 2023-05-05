@@ -52,12 +52,24 @@
       },
 
       async getPhotosDefault() {
-        return await fetch(`${this.$api.apiLink}/photos?client_id=${this.$api.clientId}&per_page=${this.$api.perPage}&page=${this.page}`)
+        return await fetch(
+            `${this.$api.apiLink}/photos?per_page=${this.$api.perPage}&page=${this.page}`, {
+              headers: {
+                'Authorization': `Bearer ${this.$api.baerer}`,
+              }
+            }
+          )
           .then((response) => response.json())
       },
 
       async getPhotosBySearch() {
-        let response = await fetch(`${this.$api.apiLink}/search/photos?client_id=${this.$api.clientId}&query=${this.search}&per_page=${this.$api.perPage}&page=${this.page}`)
+        let response = await fetch(
+            `${this.$api.apiLink}/search/photos?query=${this.search}&per_page=${this.$api.perPage}&page=${this.page}`, {
+              headers: {
+                'Authorization': `Bearer ${this.$api.baerer}`,
+              }
+            }
+          )
           .then((response) => response.json())
         return response ? response.results : []
       }
@@ -144,7 +156,8 @@
     margin-bottom: 20px;
   }
 
-  .rotate svg {
+  .rotate svg,
+  svg.rotate {
     animation: rotation 2s infinite linear;
   }
 
@@ -160,6 +173,7 @@
   @media (max-width: 768px) {
     .search-box {
       height: 250px;
+      margin-bottom: 45px;
       border-bottom: 0;
       background: url(../assets/images/home-bg-mobile.jpg) center no-repeat;
       background-size: cover;
@@ -168,6 +182,11 @@
     #search {
       padding-left: 25px;
       padding-right: 25px;
+    }
+
+    .container.gallery {
+      padding: 0 20px !important;
+      margin-top: 45px !important;
     }
   }
 </style>

@@ -16,14 +16,14 @@
     methods: {
       async likedPhoto(method = "POST") {
         let response = await fetch(`${this.$api.apiLink}/photos/${this.id}/like`, {
-          method: 'DELETE',
+          method: method,
           headers: {
-            'Authorization': `Client-ID ${this.$api.clientId}`
+            'Authorization': `Bearer ${this.$api.baerer}`,
           }
         }).then((response) => response.json())
 
-        if (response) { 
-          this.isLiked = response.liked_by_user
+        if (response && response["photo"]) { 
+          this.isLiked = response["photo"].liked_by_user
         }
       },
     },
@@ -36,7 +36,7 @@
 
 <template>
   <button
-    class="favorites-btn {{ this.isLiked ? 'active' : '' }}"
+    :class="this.isLiked ? 'favorites-btn active' : 'favorites-btn'"
     @click="() => this.likedPhoto(
       this.isLiked ? 'DELETE' : 'POST'
     )"

@@ -12,7 +12,7 @@
 </script>
 
 <template>
-  <header>
+  <header :style="this.$route.name == 'favorites' ? { borderBottom: '16px solid var(--color-grey)' } : ''">
     <div class="container flex flex-j-c-between flex-a-i-center">
       <RouterLink to="/">
         <img src="../../assets/images/logo.svg" alt="">
@@ -52,13 +52,18 @@
     margin-right: 40px;
   }
 
-  /* @media (max-width: 768px) {
+  @media (max-width: 768px) {
     header {
-      padding: 17px 0;
+      padding: 20px 0;
+      border-bottom: 0 !important;
     }
 
     header span {
       display: none;
     }
-  } */
+
+    .search-icon {
+      margin-right: 20px;
+    }
+  }
 </style>

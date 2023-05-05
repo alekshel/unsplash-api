@@ -7,17 +7,24 @@
     methods: {
       isInViewport(element) {
         const rect = element.getBoundingClientRect()
+        // rect.left >= 0 &&
+        // rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         return (
             rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
         )
       }
     },
 
     mounted() {
       window.onscroll = () => {
+        const rect = this.loadElement.getBoundingClientRect()
+        console.log(rect.right)
+        console.log(
+            rect.top >= 0,
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+          )
+
         if (!this.isInViewport(this.loadElement)) {
           return
         }
@@ -57,5 +64,13 @@
   .gallery article {
     aspect-ratio: 1;
     border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .gallery {
+      grid-template-columns: 1fr;
+      padding: 0 !important;
+      grid-gap: 20px;
+    }
   }
 </style>

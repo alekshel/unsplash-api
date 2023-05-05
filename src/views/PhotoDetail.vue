@@ -13,7 +13,13 @@
 
     async mounted() {
       let id = this.$route.params.id
-      this.photo = await fetch(`${this.$api.apiLink}/photos/${id}?client_id=${this.$api.clientId}`)
+      this.photo = await fetch(
+          `${this.$api.apiLink}/photos/${id}`, {
+            headers: {
+              'Authorization': `Bearer ${this.$api.baerer}`,
+            }
+          }
+        )
         .then((response) => response.json())
     }
   }

@@ -3,11 +3,14 @@
   import DownloadIcon from "./icons/DownloadIcon.vue"
   import FullImage from "./icons/FullImage.vue"
   import FavoriteBtn from "../components/FavoriteBtn.vue"
+  import LoadIcon from './icons/LoadIcon.vue'
 
   export default {
     data() {
       return {
         url: null,
+        loaded: false,
+        timer: null,
       }
     },
 
@@ -18,6 +21,7 @@
       DownloadIcon,
       FullImage,
       FavoriteBtn,
+      LoadIcon,
     },
 
     methods: {
@@ -25,12 +29,19 @@
         fetch(this.url.href)
           .then(response => response.blob())
           .then(blob => {
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = this.id +'.'+ this.url.searchParams.get('fm');
-            link.click();
-        })
-        .catch(console.error);
+            this.loaded = true
+
+            const link = document.createElement("a")
+            link.href = URL.createObjectURL(blob)
+            link.download = this.id +'.'+ this.url.searchParams.get('fm')
+            link.click()
+
+            this.timer = setTimeout(() => {
+              clearTimeout(this.timer)
+              this.loaded = false
+            }, 1500)
+          })
+        .catch(console.error)
       }
     },
 
@@ -64,8 +75,11 @@
           v-if="this.url"
           @click.prevent="download"
         >
-          <DownloadIcon/>
-          <span>Скачать</span>
+          <DownloadIcon v-if="!this.loaded"/>
+          <LoadIcon class="rotate" v-else/>
+          <span>{{ 
+            !this.loaded ? "Скачать" : "Загрузка"
+          }}</span>
         </a>
       </div>
     </div>
@@ -141,5 +155,42 @@
   .regular-photo img {
     box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .author img {
+      width: 48px;
+      height: 48px;
+    }
+
+    .author p {
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .favorites-btn {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+    }
+
+    .download-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 40px;
+      height: 40px;
+      padding: 0;
+    }
+
+    .download-btn span {
+      display: none;
+    }
+
+    .regular-photo a {
+      right: 10px;
+      bottom: 10px;
+    }
   }
 </style>
